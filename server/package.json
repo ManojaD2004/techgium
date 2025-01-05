@@ -1,0 +1,33 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Server source code",
+  "homepage": "https://github.com/ManojaD2004/techgium#readme",
+  "bugs": {
+    "url": "https://github.com/ManojaD2004/techgium/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ManojaD2004/techgium.git"
+  },
+  "license": "ISC",
+  "author": "Manoja D",
+  "type": "commonjs",
+  "main": "server.ts",
+  "scripts": {
+    "dev": "nodemon .",
+    "start": "npx tsc && node ./build/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "uuid": "^11.0.4"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "typescript": "^5.7.2"
+  }
+}
