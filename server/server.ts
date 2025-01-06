@@ -27,12 +27,10 @@ app.post("/v1/image/detect", (req, res) => {
   try {
     const reqBody: ImageBody = req.body;
     if (!reqBody.imageURL) {
-      res
-        .status(400)
-        .send({
-          message: "fail",
-          data: "Image didn't exists in request JSON body!",
-        });
+      res.status(400).send({
+        message: "fail",
+        data: "Image didn't exists in request JSON body!",
+      });
       return;
     }
     fs.writeFileSync(
@@ -50,6 +48,18 @@ app.post("/v1/image/detect", (req, res) => {
   }
 });
 
+app.get("/hello", (_, res) => {
+  try {
+    res.status(200).send({ message: "success", data: "Hello Tiger!" });
+  } catch (error) {
+    console.log(error);
+    res.status(400).send({ message: "fail", error: error });
+  }
+});
+
 app.listen(PORT, () => {
+  if (!fs.existsSync("./images")) {
+    fs.mkdirSync("./images");
+  }
   console.log(chalk.red(`Server listening to Port: ${PORT}`));
 });
