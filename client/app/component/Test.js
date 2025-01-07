@@ -18,7 +18,7 @@ const VideoFeed = () => {
     const base64Image = canvas.toDataURL("image/png");
 
     try {
-      const response = await fetch("http://192.168.1.2:9000/v1/image/detect", {
+      const response = await fetch("http://localhost:9000/v1/image/detect", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -51,28 +51,28 @@ const VideoFeed = () => {
     }
   };
 
-  // useEffect(() => {
-  //   if (!window) {
-  //     return;
-  //   }
-  //   const startVideoStream = async () => {
-  //     try {
-  //       const stream = await window.navigator.mediaDevices.getUserMedia({
-  //         video: true,
-  //         audio: true,
-  //       });
-  //       videoRef.current.srcObject = stream;
-  //     } catch (error) {
-  //       console.error("Error accessing webcam:", error);
-  //     }
-  //   };
+  useEffect(() => {
+    if (!window) {
+      return;
+    }
+    const startVideoStream = async () => {
+      try {
+        const stream = await window.navigator.mediaDevices.getUserMedia({
+          video: true,
+          audio: true,
+        });
+        videoRef.current.srcObject = stream;
+      } catch (error) {
+        console.error("Error accessing webcam:", error);
+      }
+    };
 
-  //   startVideoStream();
+    startVideoStream();
 
-  //   const intervalId = setInterval(captureAndSendFrame, 5000);
+    const intervalId = setInterval(captureAndSendFrame, 5000);
 
-  //   return () => clearInterval(intervalId);
-  // }, []);
+    return () => clearInterval(intervalId);
+  }, []);
 
   return (
     <div className="flex items-center justify-center h-screen">
@@ -86,7 +86,7 @@ const VideoFeed = () => {
           canvasRef.current.height = video.videoHeight;
         }}
       />
-      <button onClick={startVideoStream}>Click me</button>
+      {/* <button onClick={startVideoStream}>Click me</button> */}
       <canvas ref={canvasRef} style={{ display: "none" }} />
     </div>
   );

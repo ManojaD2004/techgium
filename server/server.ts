@@ -3,6 +3,7 @@ import cors from "cors";
 import chalk from "chalk";
 import fs from "fs";
 import { v4 } from "uuid";
+import { exec, execSync, spawn, spawnSync } from "child_process";
 
 const app = express();
 const PORT = process.env.PORT || 9000;
@@ -33,14 +34,19 @@ app.post("/v1/image/detect", (req, res) => {
       });
       return;
     }
+    const fileName = v4().slice(0, 6);
     fs.writeFileSync(
-      `./images/${v4().slice(0, 6)}.png`,
+      `../images/${fileName}.png`,
       reqBody.imageURL.replace(/^data:image\/\w+;base64,/, ""),
       {
         encoding: "base64",
       }
     );
     console.log("Image Saved");
+    const output = execSync(
+      `python3 ../python/main.py ../images/${fileName}.png`
+    );
+    console.log(output.toString());
     res.status(200).send({ message: "success" });
   } catch (error) {
     console.log(error);
@@ -58,8 +64,8 @@ app.get("/hello", (_, res) => {
 });
 
 app.listen(PORT, () => {
-  if (!fs.existsSync("./images")) {
-    fs.mkdirSync("./images");
+  if (!fs.existsSync("../images")) {
+    fs.mkdirSync("../images");
   }
   console.log(chalk.red(`Server listening to Port: ${PORT}`));
 });
