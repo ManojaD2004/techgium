@@ -1,0 +1,4 @@
+/client
+/.git
+/server/node_modules
+/python/deps
