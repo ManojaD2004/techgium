@@ -57,6 +57,23 @@ app.get("/hello", (_, res) => {
   }
 });
 
+type UserBody = {
+  userName: string;
+  profileURL: string;
+};
+
+app.post("/test/api/something", (req, res) => {
+  try {
+    const userBody: UserBody = req.body;
+    userBody.userName;
+    console.log(req.body);
+    res.status(200).send({ message: "success", data: req.body });
+  } catch (error) {
+    console.log(error);
+    res.status(400).send({ message: "fail", error: error });
+  }
+});
+
 app.listen(PORT, () => {
   if (!fs.existsSync("./images")) {
     fs.mkdirSync("./images");
