@@ -3,3 +3,7 @@
 /**/*/build
 /images
 /runs
+/python/Face-Detect-2
+/python/Face-Detect-3
+/python/manu*
+/python/yolo*

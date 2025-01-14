@@ -38,7 +38,7 @@ const Page = () => {
       
         <div className="flex items-center space-x-4">
           <img
-            src={`/images/${id}.jpeg`}
+            src={`/images/${id.toLocaleLowerCase()}.jpeg`}
             alt={`${id}'s photo`}
             className="w-28 h-28 rounded-full border-2 border-gray-300 object-cover"
           />
