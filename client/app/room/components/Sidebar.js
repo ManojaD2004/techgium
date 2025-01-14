@@ -1,3 +1,4 @@
+"use client"
 import { Calendar, Home, Inbox, Search, Settings } from "lucide-react"
 
 import {
@@ -10,28 +11,30 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
+import { useRouter } from "next/navigation"
 
 // Menu items.
 const items = [
   {
     title: "Vilas",
-    url: "/",
+    url: "/room/Vilas", 
     icon: Home,
   },
   {
     title: "Manoj",
-    url: "/",
+    url: "/room/Manoj", 
     icon: Home,
   },
   {
     title: "Aryan",
-    url: "/",
+    url: "/room/Aryan", 
     icon: Home,
   },
- 
 ]
 
 export function AppSidebar() {
+  const router = useRouter();
+
   return (
     <Sidebar>
       <SidebarContent>
@@ -42,10 +45,15 @@ export function AppSidebar() {
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
-                    <a href={item.url}>
+                    <div
+                      className="cursor-pointer"
+                      onClick={() => {
+                        router.push(item.url); 
+                      }}
+                    >
                       <item.icon />
                       <span>{item.title}</span>
-                    </a>
+                    </div>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
@@ -54,5 +62,5 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
     </Sidebar>
-  )
+  );
 }
